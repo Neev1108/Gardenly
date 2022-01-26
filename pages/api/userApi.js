@@ -1,5 +1,6 @@
 import axios from 'axios'
-import router from "next/router"
+
+
 
 //login endpoint
 export const login = async ({ email, password }) => {
@@ -9,14 +10,13 @@ export const login = async ({ email, password }) => {
         password,
       });
       
-      if (res == false){
-        window.alert("Sign In Failed. Please check email or password")
+      if (res.data != null) {
+        return res.data
       }
       else {
-        content = res.body
-        router.push({pathname: 'navigation/profile', data: {"email": content.email, "password": content.password}})
+        return null
       }
-
+      
     } catch (error) {
       console.log(error);
     }

@@ -6,10 +6,13 @@ import { login } from "../api/userApi";
 import useUser from "../../lib/useUser";
 
 import styles from "../../styles/Login.module.css";
+import {tokenState} from '../../components/states'
+import {useRecoilState} from 'recoil'
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useRecoilState(tokenState)
 
   const { mutate, loggedIn } = useUser();
 
@@ -23,7 +26,9 @@ const Login = () => {
   const onLoginSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      login({ email, password });
+      let result = login({ email, password });
+      setToken(result)
+      console.log("reached here")
     }
   };
 

@@ -3,7 +3,6 @@ import useUser from "../../lib/useUser"
 import Layout from '../../components/Layout'
 
 const profilePage = () => {
-  const { user, loading, loggedIn } = useUser();
 
   const displayInfo = () => {
     if (loading) 

@@ -12,7 +12,13 @@ const NavBar = (props) => {
   //loggedIn is true when there is data with no error
   //mutate is used for revalidation
 
-  const { loading, loggedIn, user, mutate } = useUser();
+  //const { loading, loggedIn, user, mutate } = useUser();
+
+
+  //temporary
+  let loading = false
+  let loggedIn = false
+
 
   const LoginOrNot = (props) => {
 
