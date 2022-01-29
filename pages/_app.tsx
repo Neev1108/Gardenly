@@ -1,15 +1,12 @@
-import '../styles/globals.css'
+
 import type { AppProps } from 'next/app'
-import {RecoilRoot} from 'recoil'
 
+//nextjs uses app.js to initialize pages
 
-function MyApp({ Component, pageProps }: AppProps) {
-
+function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
 
   return (
-    <RecoilRoot>
   <Component {...pageProps} />
-  </RecoilRoot>
   )
 
 

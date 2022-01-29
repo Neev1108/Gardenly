@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       .findOne({"email": email, "password": password})
       
       if (token){
-        res.body = {"email": email, "password": password, LoggedIn: true}
+        res.body = {"email": email, "password": password}
       }
       else {
         res.body = false

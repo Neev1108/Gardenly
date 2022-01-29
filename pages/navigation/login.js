@@ -2,33 +2,28 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import Layout from "../../components/Layout";
 
-import { login } from "../api/userApi";
+import { login } from "../../lib/userApi";
 import useUser from "../../lib/useUser";
+import Cookies from "js-cookie";
 
-import styles from "../../styles/Login.module.css";
-import {tokenState} from '../../components/states'
-import {useRecoilState} from 'recoil'
+
 
 const Login = () => {
+
+  //save states for email and password from form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useRecoilState(tokenState)
 
-  const { mutate, loggedIn } = useUser();
-
-  useEffect(() => {
-    if (loggedIn) Router.replace("/");
-  }, [loggedIn]);
-
-  if (loggedIn) return <> Redirecting.... </>;
+  
 
   //when submit form for login
+  //result is a response token
   const onLoginSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      let result = login({ email, password });
-      setToken(result)
-      console.log("reached here")
+      let token = login({ ObjectId });
+      Cookies.set('token', token, { expires: 60 })
+      Router.push('/navigation/profile')
     }
   };
 

@@ -5,6 +5,7 @@ export default async function handler(req, res) {
   const email = req.body.email
   const password = req.body.password
 
+  //cross checks will databse and returns the objectID, email, password
   const { db } = await connectToDatabase();
 
   const token = await db
