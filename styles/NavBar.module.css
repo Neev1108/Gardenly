@@ -4,13 +4,13 @@
     display: flex;
     align-content: left;
     margin: 25px 25px;
+    list-style-type: none;
 }
 
 .eachitem {
     border-right: 1px solid #bbb;
     float: left;
     margin-right: 14px 16px;
-  /* our font-size will be 3% of the height of the viewport */
   font-size: 20px;
 
 }
@@ -52,3 +52,4 @@
     line-height: 28px;
     letter-spacing: -0.025em;
 }
+

@@ -4,13 +4,15 @@ import Layout from '../../components/Layout'
 
 const profilePage = () => {
 
-  loggedIn = 
   
   return (
     <>
-    <Layout title="Profile" />
+    <Layout title="Profile" >
     <div>
-    </div> </>
+
+    </div> 
+    </Layout>
+    </>
   )
 }
 

@@ -1,46 +1,35 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/NavBar.module.css";
-import { useState } from "react";
+import Cookies from "js-cookie";
 
 import useUser from "../lib/useUser";
 
 //The Navbar will hold an ordered horizontal list of tabs
 //for the last check (if signed in or not), will do a nextauth.js check
 const NavBar = (props) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  let user = props.user
 
-
-  useEffect(() => {
-    async function loadUserFromCookies() {
-      const token = Cookies.get("token");
-      if (token) {
-        console.log("Got a token in the cookies, let's see if it is valid");
-        const result = await api.get("api/auth/me");
-        if (user) {
-          setUser(user);
-        }
-      }
-      else {
-        console.log("No token cookie. Please log in.")
-      }
-    }
-
-    loadUserFromCookies();
-  }, []);
+  function logout(){
+    Cookies.remove("token")
+    user = null
+  }
 
   const LoginOrNot = (props) => {
-    if (user) {
+    if (props.user) {
       return (
         <>
+        <li className={styles.eachitem}>
+          <Link href="/navigation/profile">
+            <a className={styles.eachLink}> User Dashboard </a>
+          </Link>
+        </li>
+
           <li className={styles.eachitem}>
-            <Link href="/navigation/home">
+          <Link href="/">
               <a
                 className={styles.eachLink}
-                onClick={async () => {
-                  await logout();
-                }}
+                onClick={logout}
               >
                 Logout{" "}
               </a>
@@ -48,7 +37,7 @@ const NavBar = (props) => {
           </li>
         </>
       );
-    } else if (user == null) {
+    } else if (props.user == null) {
       return (
         <li className={styles.eachitem}>
           <Link href="/navigation/login">
@@ -90,10 +79,11 @@ const NavBar = (props) => {
           </Link>
         </li>
 
-        <LoginOrNot> </LoginOrNot>
+        <LoginOrNot user={user}> </LoginOrNot>
       </ul>
     </nav>
   );
 };
 
 export default NavBar;
+

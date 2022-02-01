@@ -18,10 +18,11 @@ const Login = () => {
 
   //when submit form for login
   //result is a response token
-  const onLoginSubmit = (e) => {
+  async function onLoginSubmit(e){
     e.preventDefault();
     if (email && password) {
-      let token = login({ ObjectId });
+      let token = await login({ email: email, password: password });
+      console.log(token)
       Cookies.set('token', token, { expires: 60 })
       Router.push('/navigation/profile')
     }
@@ -29,7 +30,7 @@ const Login = () => {
 
   return (
     <>
-      <Layout title="Login"></Layout>
+      <Layout title="Login">
 
       <main>
 
@@ -68,6 +69,7 @@ const Login = () => {
           </form>
         </div>
       </main>
+      </Layout>
     </>
   );
 };
