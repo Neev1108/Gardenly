@@ -14,11 +14,11 @@ export default async function handler(req, res) {
     
     if (token){
       res.json(token)
-      console.log("User found")
+      console.log("User found from login")
     }
     else {
       res.json(null)
-      console.log("User not found")
+      console.log("User not found in login")
     }
 
 

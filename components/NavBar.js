@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/NavBar.module.css";
 import Cookies from "js-cookie";
 
-import useUser from "../lib/useUser";
+import { Router } from "next/router";
 
 //The Navbar will hold an ordered horizontal list of tabs
 //for the last check (if signed in or not), will do a nextauth.js check
