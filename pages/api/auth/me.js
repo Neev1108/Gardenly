@@ -1,21 +1,19 @@
 
-import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../util/mongodb";
 
 export default async function handler(req, res) {
-
-    const id = req.body.token
-  
+    const token = req.body.token
+    
     const { db } = await connectToDatabase();
   
-    const email = await db
+    const user = await db
       .collection("users")
-      .findOne({"token": id})
+      .findOne({"token": token})
 
       
-      if (email){
+      if (user){
         console.log("User info found for profile")
-        res.json(email)
+        res.json(user)
       }
       else {
         console.log("User info not found for profile")

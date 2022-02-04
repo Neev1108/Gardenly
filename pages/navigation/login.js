@@ -16,8 +16,8 @@ const Login = () => {
     e.preventDefault();
     if (email && password) {
       let response = await login({ email: email, password: password });
-      let { _id } = response;
-      Cookies.set("token", _id, { expires: 60 });
+      let { token } = response;
+      Cookies.set("token", token, { expires: 60 });
       Router.push("/navigation/profile");
     }
   }

@@ -22,6 +22,7 @@ const Layout = ({children}, props) => {
       }
       else {
         console.log("No token cookie. Please log in.")
+        Cookies.remove("token")
       }
     }
 
