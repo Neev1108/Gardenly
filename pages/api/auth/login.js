@@ -8,11 +8,13 @@ export default async function handler(req, res) {
   //cross checks will databse and returns the objectID, email, password
   const { db } = await connectToDatabase();
 
-  const user = await db
+  const user_token = await db
     .collection("users")
     .findOne({"email": email, "password": password})
+    .project({token: 1})
     
-    if (user){
+    console.log(user_token)
+    if (user_token){
       res.json(user)
       console.log("User found from login")
     }

@@ -10,6 +10,19 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const auth_token = Cookies.get("token");
+      if (auth_token) {
+        Router.push("/")
+      } else {
+        console.log("No token cookie. Please log in.");
+      }
+    }
+
+    loadUserFromCookies();
+  }, []);
+
   //when submit form for login
   //result is a response token
   async function onLoginSubmit(e) {
