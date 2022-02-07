@@ -2,8 +2,9 @@ import Layout from "../../components/Layout";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { getUser } from "../../lib/userApi";
+import React from 'react'
 
-const profilePage = () => {
+const profilePage = (props) => {
   const [email, setEmail] = useState("");
   const [form, showForm] = useState(false);
 
@@ -165,7 +166,10 @@ const profilePage = () => {
           {form ? editProfile() : null}
         </div>
       </Layout>
+
     </>
+
+
   );
 };
 
