@@ -4,16 +4,15 @@ This project is a in the work production of a full stack web application. It bui
 
 # The Application
 
-The project is a gardening application that allows users to store data about their plants and gardening practices. They can create a portfolio for their garden, checking in on times to water, seasons to plant, and other useful tips. Functions like best matainence practices might be implemeneted in later releases through some ML algorithms.
-
+The project is a gardening application that allows users to store data about their plants and gardening practices. They can create a portfolio for their garden, checking in on times to water, seasons to plant, and other useful tips. Functions like best matainence practices might be implemented in later releases through some ML algorithms.
 
 <h1> The structure   </h1>
-<p> This application uses NextJs for the majority of the client side and server side programming. It uses Recoil for state management, and MongoDB for the backend cloud database. Tailwind is used for fast css styling. Currently for authentication, I am using a database authentication style that develops my own token for experience's sake, but if I ever do deploy, then I might use a framework like Auth0. Deployment will take awhile because I have to make sure the website follows top security practices like middleware, token authorization, and other things.  </p>
+<p> This application uses NextJs for the majority of the client side and server side programming and MongoDB for the backend cloud database. Tailwind is used for fast css styling, along with Materials UI for front-end web designing. Currently for authentication, I am using a database authentication style that gives an encrypted token which is then set as a js-cookie. This token will give access to the user for certain elements in the database.
+
 
 # Known Issues
 
-Logging out from root page does not change navbar to login/signup (everywhere else works)
-
+Logging out from root page does not change navbar to login/signup
 
 # Next.js + Tailwind CSS Example
 

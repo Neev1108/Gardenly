@@ -7,6 +7,9 @@ import React from 'react'
 const profilePage = (props) => {
   const [email, setEmail] = useState("");
   const [form, showForm] = useState(false);
+  const [first_name, setFirstName] = useState("")
+  const [last_name, setLastName] = useState("")
+  const [phone_number, setPhoneNumber] = useState("")
 
   useEffect(() => {
     async function loadUserFromCookies() {
@@ -29,60 +32,14 @@ const profilePage = (props) => {
     edit_profile_button.remove()
   }
 
+  function profileChanged(){
+    console.log("Hello")
+  }
+
   function editProfile() {
     return (
       <>
         <form>
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="email"
-              name="floating_email"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 
-              border-b-2 border-gray-300 appearance-none dark:text-white
-               dark:border-gray-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="floating_email"
-            >
-              Email address
-            </label>
-          </div>
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="password"
-              name="floating_password"
-              id="floating_password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 
-              bg-transparent border-0 border-b-2 border-gray-300 appearance-none 
-              dark:text-white dark:border-gray-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="floating_password"
-            >
-              Password
-            </label>
-          </div>
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="password"
-              name="repeat_password"
-              id="floating_repeat_password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 
-              bg-transparent border-0 border-b-2 border-gray-300 
-              appearance-none dark:text-white peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="floating_repeat_password"
-            >
-              Confirm password
-            </label>
-          </div>
           <div className="grid xl:grid-cols-2 xl:gap-6">
             <div className="relative z-0 mb-6 w-full group">
               <input
@@ -90,10 +47,11 @@ const profilePage = (props) => {
                 name="floating_first_name"
                 id="floating_first_name"
                 className="block py-2.5 px-0 w-full text-sm 
-                text-gray-900 bg-transparent border-0 border-b-2 
-                border-gray-300 appearance-none dark:text-white peer"
+                text-black bg-transparent border-0 border-b-2 
+                border-gray-300 appearance-none peer"
                 placeholder=" "
                 required
+                onChange={(e) => setFirstName(e.target.value)}
               />
               <label
                 htmlFor="floating_first_name"
@@ -107,10 +65,11 @@ const profilePage = (props) => {
                 name="floating_last_name"
                 id="floating_last_name"
                 className="block py-2.5 px-0 w-full text-sm 
-                text-gray-900 bg-transparent border-0 border-b-2 
-                border-gray-300 appearance-none dark:text-white peer"
+                text-black bg-transparent border-0 border-b-2 
+                border-gray-300 appearance-none peer"
                 placeholder=" "
                 required
+                onChange={(e) => setLastName(e.target.value)}
               />
               <label
                 htmlFor="floating_last_name"
@@ -126,11 +85,12 @@ const profilePage = (props) => {
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 name="floating_phone"
                 id="floating_phone"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 
+                className="block py-2.5 px-0 w-full text-sm text-black 
                 bg-transparent border-0 border-b-2 border-gray-300 appearance-none 
-                dark:text-white dark:border-gray-600 peer"
+                dark:border-gray-600 peer"
                 placeholder=" "
                 required
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
               <label
                 htmlFor="floating_phone"
@@ -143,6 +103,7 @@ const profilePage = (props) => {
             type="submit"
             className="text-white bg-black font-medium rounded-lg 
             text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            onClick = {profileChanged}
           >
             Submit
           </button>
