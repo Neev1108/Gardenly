@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { getUser } from "../../lib/userApi";
 import React from 'react'
+import { profileEdit } from '../../lib/profileAPI'
 
 const profilePage = (props) => {
   const [email, setEmail] = useState("");
@@ -32,21 +33,23 @@ const profilePage = (props) => {
     edit_profile_button.remove()
   }
 
-  function profileChanged(){
-    console.log("Hello")
+  async function profileChanged(){
+    const auth_token = Cookies.get("token");
+    if (first_name && last_name && phone_number){
+      let result = profileEdit(auth_token, first_name, last_name, phone_number)
+
+    }
+
+
   }
 
   function editProfile() {
     return (
       <>
-        <form>
           <div className="grid xl:grid-cols-2 xl:gap-6">
             <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="text"
-                name="floating_first_name"
-                id="floating_first_name"
-                className="block py-2.5 px-0 w-full text-sm 
+              <input type="text" name="floating_first_name" id="floating_first_name"
+              className="block py-2.5 px-2 w-full text-sm 
                 text-black bg-transparent border-0 border-b-2 
                 border-gray-300 appearance-none peer"
                 placeholder=" "
@@ -61,10 +64,8 @@ const profilePage = (props) => {
             </div>
             <div className="relative z-0 mb-6 w-full group">
               <input
-                type="text"
-                name="floating_last_name"
-                id="floating_last_name"
-                className="block py-2.5 px-0 w-full text-sm 
+                type="text" name="floating_last_name" id="floating_last_name"
+                className="block py-2.5 px-2 w-full text-sm 
                 text-black bg-transparent border-0 border-b-2 
                 border-gray-300 appearance-none peer"
                 placeholder=" "
@@ -80,12 +81,8 @@ const profilePage = (props) => {
           </div>
           <div className="grid xl:grid-cols-2 xl:gap-6">
             <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="tel"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                name="floating_phone"
-                id="floating_phone"
-                className="block py-2.5 px-0 w-full text-sm text-black 
+              <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone"
+                className="block py-2.5 px-2 w-full text-sm text-black 
                 bg-transparent border-0 border-b-2 border-gray-300 appearance-none 
                 dark:border-gray-600 peer"
                 placeholder=" "
@@ -107,7 +104,6 @@ const profilePage = (props) => {
           >
             Submit
           </button>
-        </form>
       </>
     );
   }
@@ -123,6 +119,15 @@ const profilePage = (props) => {
           >
             {" "}
             Edit Profile{" "}
+          </button>
+
+          <button id="user_profile"
+            className=" text-white text-3xl font-bold justify-center bg-black
+          border-black border-solid rounded p-4 flex"
+            onClick={buttonPressed}
+          >
+            {" "}
+            User Dashboard {" "}
           </button>
           {form ? editProfile() : null}
         </div>
