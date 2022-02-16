@@ -1,6 +1,16 @@
 
+import React from 'react'
 
-export function editProfile() {
+const editProfile = (props) => {
+  const [first_name, setFirstName] = React.useState("")
+  const [last_name, setLastName] = React.useState("")
+  const [phone_number, setPhoneNumber] = React.useState("")
+
+  function profileChanged() {
+    props.setParameters(first_name, last_name, phone_number)
+  }
+
+
     return (
       <>
         <div className="grid xl:grid-cols-2 xl:gap-6">
@@ -61,3 +71,5 @@ export function editProfile() {
       </>
     );
   }
+
+  export default editProfile
