@@ -3,7 +3,7 @@ import {useState} from 'react'
 const userProfile = (props) => {
 
     return (
-        <h1> Hi </h1>
+        <h1> {props.user} </h1>
     )
 }
 

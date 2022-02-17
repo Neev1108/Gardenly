@@ -6,13 +6,31 @@ import { useState} from "react";
 import { signup } from '../../lib/userApi'
 import Cookies from "js-cookie";
 
+/**
+* Brief description of the class here
+* Signup page will display a form to enter user information to enter into database and then set token.
+*/
+
 function Signup() {
+
+  /*
+  Following states are for user entered data and then setting an alert if something is wrong
+  */
     const [signup_email, setSignUpEmail] = useState("")
     const [signup_password, setSignUpPassword] = useState("")
     const [reentered_password, setReenter] = useState("")
     const [alert, setAlert] = useState(false)
 
 
+/** 
+* Brief description of the function here.
+* @summary Sign up Submit is similar to login but will check if password and renentered password are the same.
+  Then it will do an api call to add the user into the database while returning and setting a token. An alert will 
+  be given if incorrect (Will work on alert feature later)
+* @param {Event} e - The event when submit selected for form.
+* @return {Cookie} Set cookie for token and reroute to the homepage. 
+*/
+    
   async function onSignUpSubmit(e) {
     e.preventDefault();
     console.log("Sign up Button clicked")
@@ -33,6 +51,10 @@ function Signup() {
 
   }
 
+
+  /*
+    Similar to login form but asks to reneter password and will give alert
+  */
   return (
       <>
     <Layout title="Signup">

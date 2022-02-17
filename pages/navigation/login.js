@@ -1,3 +1,4 @@
+//All imports will be for api calls, routing, cookies and state setting
 import { useState, useEffect } from "react";
 import Router from "next/router";
 import Layout from "../../components/Layout";
@@ -5,13 +6,26 @@ import Layout from "../../components/Layout";
 import { login } from "../../lib/userApi";
 import Cookies from "js-cookie";
 
+/**
+ * Brief description of the class here
+ * Component will be used for login, storing email and password after login info is submitted
+ */
+
 const Login = () => {
   //save states for email and password from form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  //when submit form for login
-  //result is a response token
+  /**
+   * Brief description of the function here.
+   * @summary Function called when the submit button is pressed. Will gather data from state
+   * and make an api call to the login endpoint. The endpoint will interact with the database
+   * and insert an entry into the document. A token will be returned relating to that user and a cookie will be set.
+   * User will then be rerouted to the profile page
+   * @param {Event} e - The event when a button is pressed.
+   * @return {Cookie} A cookie is set for the token for 60 min.
+   */
+
   async function onLoginSubmit(e) {
     e.preventDefault();
     if (email && password) {
@@ -22,11 +36,18 @@ const Login = () => {
     }
   }
 
-  async function rerouteToSignup(){
-    Router.push("/navigation/signup")
+  /**
+   * Brief description of the function here.
+   * @summary Reroute to signup if signup button is pressed. Allows user to create an account.
+   */
+
+  async function rerouteToSignup() {
+    Router.push("/navigation/signup");
   }
 
-
+  /*
+  Login form or redirect to signup page for render
+  */
   return (
     <>
       <Layout title="Login">
@@ -80,9 +101,12 @@ const Login = () => {
           </div>
 
           <div className="justify-center mt-2 m-auto flex">
-            <button className="btn btn-primary text-white bg-black mt-8 p-2 
-            rounded font-bold" onClick={rerouteToSignup}> 
-            Do not have an account? Signup!
+            <button
+              className="btn btn-primary text-white bg-black mt-8 p-2 
+            rounded font-bold"
+              onClick={rerouteToSignup}
+            >
+              Do not have an account? Signup!
             </button>
           </div>
         </main>
