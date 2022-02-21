@@ -1,6 +1,5 @@
 import NavBar from "./NavBar";
 import Head from "next/head";
-import overall from '../styles/overall.module.css'
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie'
 
@@ -37,9 +36,11 @@ const Layout = ({children}, props) => {
           <title> {props.title} </title>
         </Head>
 
-        <main>
+        <main className="bg-black">
             <NavBar user={user}>  </NavBar>
+            <div id="content"> 
             {children}
+            </div>
         </main>
 
     </>

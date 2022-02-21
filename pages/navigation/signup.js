@@ -58,7 +58,6 @@ function Signup() {
   return (
       <>
     <Layout title="Signup">
-    <main>
       <div
         className=" w-full max-w-xs container justify-center flex flex-col border-solid 
    bg-black rounded px-10 pt-6 pb-8 mt-24 m-auto"
@@ -123,7 +122,6 @@ function Signup() {
             {alert ? returnAlertMessage(): null}
         </div>
       </div>
-    </main>
   </Layout>
 </>
   )

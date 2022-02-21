@@ -4,12 +4,6 @@ import { getUser } from "../../lib/userApi";
 import React from "react";
 import { profileEdit } from "../../lib/profileAPI";
 
-// Imports for Material Ui Components
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Divider from "@mui/material/Divider";
 
 //Imports for Parent or Child components
 import Layout from "../../components/Layout";
@@ -37,6 +31,7 @@ class profilePage extends React.Component {
    * @param phone_number - Phone Number data submitted from child component (EditProfile) in a callback
    * @param page - sets the current page after a toolbar click, default will be the User Profile page
    */
+
   constructor(props) {
     super(props);
     this.state = {
@@ -73,18 +68,26 @@ class profilePage extends React.Component {
     this.loadUserFromCookies();
   };
 
-
-/** 
+  /** 
 * Brief description of the function here.
 * @summary This function will make the api call to update the user document in mongodb. 
   It will first find the current token for the user and then make a call to the profile/editProfile endpoint.
   That call will update the user document with the information.
 */
-  
+
   profileChanged = () => {
     const auth_token = Cookies.get("token");
-    if (this.state.first_name && this.state.last_name && this.state.phone_number) {
-      let result = profileEdit(auth_token, this.state.first_name, this.state.last_name, this.state.phone_number);
+    if (
+      this.state.first_name &&
+      this.state.last_name &&
+      this.state.phone_number
+    ) {
+      let result = profileEdit(
+        auth_token,
+        this.state.first_name,
+        this.state.last_name,
+        this.state.phone_number
+      );
     }
   };
 
@@ -117,7 +120,6 @@ class profilePage extends React.Component {
   };
 
   render() {
-
     /*
     The following code will check the page state and return a child component that will be placed 
     at the main content of the dashboard
@@ -133,41 +135,28 @@ class profilePage extends React.Component {
       );
     }
 
-
     return (
       <>
         <Layout title="Profile">
+          {/* Dashboard will be an grid div with a toolbar on the left and the main content on the right */}
+          <div id="dashboard" className="flex flex-row mt-10">
+            <div id="sidebar" className="flex flex-col
+             text-white h-72 w-48 ml-16 space-y-4">
+              <button className="hover:border p-2 hover:text-green-700" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+                User Profile
+              </button>
 
-        {/* Dashboard will be an grid div with a toolbar on the left and the main content on the right */}
-          <div
-            id="dasbboard"
-            className="grid grid-cols-6 gap-2 p-4 justify-start "
-          >
-            <Toolbar className="w-32 col-start-1 col-span-1">
-              <Divider>
-                <List>
-                  {["User Profile", "Edit Profile", "Your Garden"].map(
-                    (text) => (
-                      <ListItem
-                        className="bg-black"
-                        button
-                        key={text}
-                        onClick={() => this.buttonPressed(text)}
-                      >
-                        <ListItemText
-                          className="text-green-800 text-xl"
-                          primary={text}
-                        />
-                      </ListItem>
-                    )
-                  )}
-                </List>
-              </Divider>
-            </Toolbar>
+              <button className="hover:border-2 p-2 hover:text-green-700" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+                Edit Profile
+              </button>
 
+              <button className="hover:border-2 p-2 hover:text-green-700" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+                Your Garden
+              </button>
+            </div>
 
             {/* Main Content of dashboard goes here after checking what page was clicked */}
-            <div id="main_content" className="col-start-3 col-span-4">
+            <div id="main_content" className="pl-10">
               {checkPage}
             </div>
           </div>

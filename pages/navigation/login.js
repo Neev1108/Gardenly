@@ -51,9 +51,8 @@ const Login = () => {
   return (
     <>
       <Layout title="Login">
-        <main>
           <div
-            className=" w-full max-w-xs container justify-center flex flex-col border-solid 
+            className="max-w-xs justify-center flex flex-col border-solid 
        bg-black rounded px-10 pt-6 pb-8 mt-24 m-auto"
           >
             <h1 className="text-center text-lg font-bold text-white ">
@@ -92,24 +91,23 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="btn btn-primary text-black bg-white mt-8 p-2 
-            rounded font-bold"
+                className="btn btn-primary text-black bg-white p-2 
+            rounded font-bold justify-center mt-4"
               >
                 Sign In
               </button>
             </form>
           </div>
 
-          <div className="justify-center mt-2 m-auto flex">
+          <div className="flex justify-center mt-4 p-10 border-white border-solid">
             <button
-              className="btn btn-primary text-white bg-black mt-8 p-2 
+              className=" text-white bg-black p-2
             rounded font-bold"
               onClick={rerouteToSignup}
             >
               Do not have an account? Signup!
             </button>
           </div>
-        </main>
       </Layout>
     </>
   );
