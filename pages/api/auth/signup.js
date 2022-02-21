@@ -17,7 +17,8 @@ export default async function handler(req, res) {
   //cross checks will databse and returns the objectID, email, password
   const { db } = await connectToDatabase();
 
-  db.collection("users").insertOne({email: email, password: password, token: token})
+  db.collection("users").insertOne({email: email, password: password, 
+    FirstName: "", LastName:"", PhoneNumber: "", token: token})
     
   res.json({token: token})
 

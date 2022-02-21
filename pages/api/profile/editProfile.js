@@ -24,6 +24,7 @@ export default async function handler(req, res) {
         if (err) throw err;
         console.log("1 document updated");
         db.close();
+        res.status(200)
       }
     );
 }

@@ -36,7 +36,7 @@ const Layout = ({children}, props) => {
           <title> {props.title} </title>
         </Head>
 
-        <main className="bg-black">
+        <main className="bg-black h-screen overflow-hidden">
             <NavBar user={user}>  </NavBar>
             <div id="content"> 
             {children}

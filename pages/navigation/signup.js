@@ -37,7 +37,7 @@ function Signup() {
     if (signup_email && signup_password) {
         if (signup_password == reentered_password){
             let response = await signup(signup_email, signup_password);
-            let { token } = response;
+            let { token } = response.data;
             Cookies.set("token", token, { expires: 60 });
             Router.push("/");
         }

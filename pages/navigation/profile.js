@@ -9,7 +9,9 @@ import { profileEdit } from "../../lib/profileAPI";
 import Layout from "../../components/Layout";
 import EditProfile from "../../components/EditProfile";
 import UserProfile from "../../components/UserProfile";
-import GardeningPortfolio from "../../components/GardenPortfolio";
+import { Router } from "next/router";
+
+
 
 /**
 * Brief description of the class here
@@ -57,8 +59,15 @@ class profilePage extends React.Component {
     const auth_token = Cookies.get("token");
     if (auth_token) {
       let response = await getUser({ token: auth_token });
-      let { email, token } = response;
-      this.setState({ user: email });
+      if (response){
+        let { email, token, FirstName, PhoneNumber, LastName} = response.data;
+        this.setState({ user: email, first_name: FirstName, last_name: LastName,
+        phone_number: PhoneNumber });
+      }
+      else {
+        console.log("User not found or error. Please retry sign in or signup.")
+        Router.push("/navigation/login")
+      }
     } else {
       console.log("No token cookie. Please log in.");
     }
@@ -75,19 +84,26 @@ class profilePage extends React.Component {
   That call will update the user document with the information.
 */
 
-  profileChanged = () => {
+  profileChanged = async () => {
     const auth_token = Cookies.get("token");
     if (
       this.state.first_name &&
       this.state.last_name &&
       this.state.phone_number
     ) {
-      let result = profileEdit(
+      let res = await profileEdit(
         auth_token,
         this.state.first_name,
         this.state.last_name,
         this.state.phone_number
       );
+
+      if (res.status == 200){
+        Router.push("navigation/profile")
+      }
+      else {
+        console.log("Something went wrong with profile edit")
+      }
     }
   };
 
@@ -100,9 +116,8 @@ class profilePage extends React.Component {
   buttonPressed = (text) => {
     if (text == "User Profile") {
       this.setState({ page: "User Profile" });
-    } else if (text == "Your Garden") {
-      this.setState({ page: "Your Garden" });
-    } else {
+    } 
+     else {
       this.setState({ page: "Edit Profile" });
     }
   };
@@ -117,6 +132,8 @@ class profilePage extends React.Component {
     this.setState({ first_name: firstName });
     this.setState({ last_name: lastName });
     this.setState({ phone_number: phoneNumber });
+
+    this.profileChanged()
   };
 
   render() {
@@ -127,9 +144,8 @@ class profilePage extends React.Component {
     var checkPage;
     if (this.state.page == "User Profile") {
       checkPage = <UserProfile user={this.state.user}> </UserProfile>;
-    } else if (this.state.page == "Your Garden") {
-      checkPage = <GardeningPortfolio> </GardeningPortfolio>;
-    } else if (this.state.page == "Edit Profile") {
+    } 
+    else if (this.state.page == "Edit Profile") {
       checkPage = (
         <EditProfile setParameters={this.setParameters}> </EditProfile>
       );
@@ -141,22 +157,18 @@ class profilePage extends React.Component {
           {/* Dashboard will be an grid div with a toolbar on the left and the main content on the right */}
           <div id="dashboard" className="flex flex-row mt-10">
             <div id="sidebar" className="flex flex-col
-             text-white h-72 w-48 ml-16 space-y-4">
-              <button className="hover:border p-2 hover:text-green-700" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+             text-white h-screen w-48 ml-16 space-y-4 bg-neutral-900">
+              <button className="hover:border hover:text-gray-500 text-white leading-6 mt-20" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
                 User Profile
               </button>
 
-              <button className="hover:border-2 p-2 hover:text-green-700" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+              <button className="hover:border-2 hover:text-gray-500 text-white leading-6" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
                 Edit Profile
-              </button>
-
-              <button className="hover:border-2 p-2 hover:text-green-700" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
-                Your Garden
               </button>
             </div>
 
             {/* Main Content of dashboard goes here after checking what page was clicked */}
-            <div id="main_content" className="pl-10">
+            <div className="w-9/12" id="main_content">
               {checkPage}
             </div>
           </div>

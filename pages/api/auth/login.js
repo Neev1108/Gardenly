@@ -22,11 +22,11 @@ export default async function handler(req, res) {
     .findOne({"email": email, "password": password})
     
     if (user){
-      res.json(user)
+      res.status(200).json(user)
       console.log("User found from login")
     }
     else {
-      res.json(null)
+      res.status(400).json(null)
       console.log("User not found in login")
     }
 

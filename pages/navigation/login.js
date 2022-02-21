@@ -15,6 +15,7 @@ const Login = () => {
   //save states for email and password from form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState(false)
 
   /**
    * Brief description of the function here.
@@ -27,12 +28,21 @@ const Login = () => {
    */
 
   async function onLoginSubmit(e) {
+    console.log("Sign in button clicked")
     e.preventDefault();
     if (email && password) {
       let response = await login({ email: email, password: password });
-      let { token } = response;
-      Cookies.set("token", token, { expires: 60 });
-      Router.push("/navigation/profile");
+      if (response){
+        setAlert(false)
+        let { token } = response.data;
+        Cookies.set("token", token, { expires: 60 });
+        Router.push("/navigation/profile");
+      }
+      else {
+        console.log("User not found or error occured. Please retry login.")
+        setAlert(true)
+        Router.push("/navigation/login")
+      }
     }
   }
 
@@ -43,6 +53,14 @@ const Login = () => {
 
   async function rerouteToSignup() {
     Router.push("/navigation/signup");
+  }
+
+  function returnAlertMessage(){
+    return(
+    <div className="max-w-full flex">
+        <span className="text-red-500 justify-center m-auto"> User not found or error occured. Please retry login. </span>
+    </div>
+    )
   }
 
   /*
@@ -107,6 +125,10 @@ const Login = () => {
             >
               Do not have an account? Signup!
             </button>
+          </div>
+
+          <div> 
+          {alert ? returnAlertMessage(): null}
           </div>
       </Layout>
     </>
