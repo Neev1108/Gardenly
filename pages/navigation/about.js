@@ -9,7 +9,7 @@ const about = () => {
         id="about_content"
         className="flex flex-col w-screen h-screen bg-[#ffffff] overflow-auto"
       >
-        <div className="text-center bg-mint w-9/12 h-64 ml-44 mr-44 mt-10">
+        <div className="text-center bg-mint w-9/12 h-64 ml-44 mr-44 mt-10 rounded-xl">
           <h1 className="text-[48px] font-serif font-semibold text-grape">
             {" "}
             About Us{" "}

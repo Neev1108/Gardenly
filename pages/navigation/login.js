@@ -15,7 +15,7 @@ const Login = () => {
   //save states for email and password from form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState(false)
+  const [alert, setAlert] = useState(false);
 
   /**
    * Brief description of the function here.
@@ -28,20 +28,19 @@ const Login = () => {
    */
 
   async function onLoginSubmit(e) {
-    console.log("Sign in button clicked")
+    console.log("Sign in button clicked");
     e.preventDefault();
     if (email && password) {
       let response = await login({ email: email, password: password });
-      if (response){
-        setAlert(false)
+      if (response) {
+        setAlert(false);
         let { token } = response.data;
         Cookies.set("token", token, { expires: 60 });
         Router.push("/navigation/profile");
-      }
-      else {
-        console.log("User not found or error occured. Please retry login.")
-        setAlert(true)
-        Router.push("/navigation/login")
+      } else {
+        console.log("User not found or error occured. Please retry login.");
+        setAlert(true);
+        Router.push("/navigation/login");
       }
     }
   }
@@ -55,12 +54,15 @@ const Login = () => {
     Router.push("/navigation/signup");
   }
 
-  function returnAlertMessage(){
-    return(
-    <div className="max-w-full flex">
-        <span className="text-red-500 justify-center m-auto"> User not found or error occured. Please retry login. </span>
-    </div>
-    )
+  function returnAlertMessage() {
+    return (
+      <div className="w-8/12 flex bg-white rounded-xl m-auto">
+        <span className="text-red-500 font-extrabold justify-center m-auto">
+          {" "}
+          User not found or error occured. Please retry login.{" "}
+        </span>
+      </div>
+    );
   }
 
   /*
@@ -69,18 +71,23 @@ const Login = () => {
   return (
     <>
       <Layout title="Login">
+        <div
+          id="login_content"
+          className="flex flex-col w-screen h-screen bg-mint overflow-auto"
+        >
+          <div className="flex flex-col">
           <div
-            className="max-w-xs justify-center flex flex-col border-solid 
-       bg-black rounded px-10 pt-6 pb-8 mt-24 m-auto"
+            className="max-w-xs h-80 justify-center flex flex-col border-solid 
+          bg-black rounded px-10 pt-6 pb-8 mt-24 m-auto"
           >
-            <h1 className="text-center text-lg font-bold text-white ">
+            <h1 className="text-center text-[30px] font-bold text-mint font-serif ">
               {" "}
-              Login or Signup{" "}
+              Login{" "}
             </h1>
 
             <form className="" onSubmit={onLoginSubmit}>
-              <div className="form-group pt-8">
-                <label className="text-white" htmlFor="email">
+              <div className="form-group pt-4">
+                <label className="text-mint" htmlFor="email">
                   {" "}
                   Email address
                 </label>
@@ -94,8 +101,8 @@ const Login = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <label className=" text-white " htmlFor="password">
+              <div className="form-group pt-4">
+                <label className=" text-mint " htmlFor="password">
                   Password
                 </label>
                 <input
@@ -109,27 +116,27 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="btn btn-primary text-black bg-white p-2 
-            rounded font-bold justify-center mt-4"
+                className="btn btn-primary bg-black text-mint border-2 border-mint p-2 
+            rounded font-bold justify-center mt-4 hover:-translate-y-1 hover:scale-105"
               >
                 Sign In
               </button>
             </form>
           </div>
 
-          <div className="flex justify-center mt-4 p-10 border-white border-solid">
+          <div className="justify-center p-10 border-white border-solid object-center m-auto">
             <button
-              className=" text-white bg-black p-2
-            rounded font-bold"
+              className="bg-black p-2
+            rounded font-bold text-mint hover:-translate-y-1 hover:scale-105"
               onClick={rerouteToSignup}
             >
               Do not have an account? Signup!
             </button>
           </div>
 
-          <div> 
-          {alert ? returnAlertMessage(): null}
-          </div>
+          <div>{alert ? returnAlertMessage() : null}</div>
+        </div>
+        </div>
       </Layout>
     </>
   );

@@ -155,7 +155,11 @@ class profilePage extends React.Component {
       <>
         <Layout title="Profile">
           {/* Dashboard will be an grid div with a toolbar on the left and the main content on the right */}
-          <div id="dashboard" className="flex flex-row mt-10">
+          <div
+            id="profile_content"
+            className="flex flex-col w-screen h-screen bg-mint overflow-auto"
+          >
+          <div id="dashboard" className="flex flex-row ">
             <div id="sidebar" className="flex flex-col
              text-white h-screen w-48 ml-16 space-y-4 bg-neutral-900">
               <button className="hover:border hover:text-gray-500 text-white leading-6 mt-20" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
@@ -171,6 +175,7 @@ class profilePage extends React.Component {
             <div className="w-9/12" id="main_content">
               {checkPage}
             </div>
+          </div>
           </div>
         </Layout>
       </>

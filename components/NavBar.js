@@ -21,7 +21,7 @@ const NavBar = (props) => {
         <>
         <li className={styles.eachitem}>
           <Link href="/navigation/profile">
-            <a className={styles.eachLink}> User Dashboard </a>
+            <a className={styles.eachLink}> Account </a>
           </Link>
         </li>
 

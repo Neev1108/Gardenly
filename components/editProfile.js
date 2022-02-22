@@ -13,22 +13,23 @@ const editProfile = (props) => {
 
     return (
       <>
-        <div className="grid xl:grid-cols-2 xl:gap-6">
-          <div className="relative z-0 mb-6 w-full">
+      <div className="h-screen bg-slate-900">
+        <div className="flex flex-col h-[400px]">
+          <div className="mt-20 mb-6 m-auto">
             <input
               type="text"
               name="floating_first_name"
               id="floating_first_name"
               className="block py-2.5 px-2 w-full text-sm 
                 text-black bg-white rounded-md border-0 border-b-2 
-                border-gray-300 appearance-none"
+                border-gray-300 appearance-none "
               placeholder=" "
               required
               onChange={(e) => setFirstName(e.target.value)}
             />
             <label className="text-white" htmlFor="floating_first_name">First name</label>
           </div>
-          <div className="relative z-0 mb-6 w-full group">
+          <div className="mb-6 m-auto">
             <input
               type="text"
               name="floating_last_name"
@@ -42,9 +43,7 @@ const editProfile = (props) => {
             />
             <label className="text-white" htmlFor="floating_last_name">Last name</label>
           </div>
-        </div>
-        <div className="grid xl:grid-cols-2 xl:gap-6">
-          <div className="relative z-0 mb-6 w-full group">
+          <div className="mb-6 m-auto">
             <input
               type="tel"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -59,15 +58,16 @@ const editProfile = (props) => {
             />
             <label className="text-white" htmlFor="floating_phone">Phone number</label>
           </div>
-        </div>
         <button
           type="submit"
           className="text-white bg-black font-medium rounded-lg 
-            text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:border"
+            text-sm px-5 py-2.5 text-center hover:border w-2/4 m-auto"
           onClick={profileChanged}
         >
           Submit
         </button>
+        </div>
+        </div>
       </>
     );
   }
