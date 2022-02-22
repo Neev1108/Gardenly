@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { getUser } from "../../lib/userApi";
 import React from "react";
 import { profileEdit } from "../../lib/profileAPI";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 //Imports for Parent or Child components
@@ -98,6 +99,7 @@ class profilePage extends React.Component {
         this.state.phone_number
       );
 
+      console.log(res)
       if (res.status == 200){
         Router.push("navigation/profile")
       }
@@ -162,11 +164,12 @@ class profilePage extends React.Component {
           <div id="dashboard" className="flex flex-row ">
             <div id="sidebar" className="flex flex-col
              text-white h-screen w-48 ml-16 space-y-4 bg-neutral-900">
-              <button className="hover:border hover:text-gray-500 text-white leading-6 mt-20" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+               <AccountCircleIcon className="h-[100px] w-[100px] m-12"> </AccountCircleIcon>
+              <button className="text-[20px] font-semibold hover:border hover:text-gray-500 text-white leading-6 mt-20" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
                 User Profile
               </button>
 
-              <button className="hover:border-2 hover:text-gray-500 text-white leading-6" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+              <button className="text-[20px] font-semibold hover:border-2 hover:text-gray-500 text-white leading-6" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
                 Edit Profile
               </button>
             </div>

@@ -8,6 +8,7 @@ export default async function handler(req, res) {
 
   //cross checks will databse and returns the objectID, email, password
   const { db } = await connectToDatabase();
+  console.log(db)
 
  await db
     .collection("users")
@@ -23,8 +24,7 @@ export default async function handler(req, res) {
       function (err, res) {
         if (err) throw err;
         console.log("1 document updated");
-        db.close();
-        res.status(200)
+        res.status(200).json()
       }
     );
 }
