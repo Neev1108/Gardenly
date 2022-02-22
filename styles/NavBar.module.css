@@ -18,10 +18,9 @@
 
 .eachLink {
     display: block;
-    color: white;
+    color: #3BBA9C;
     text-align: center;
     padding: 14px 16px;
-    text-decoration: none;
 
   }
 
@@ -47,6 +46,7 @@
 
 .logo_text {
     margin-left: 100px;
+    color: #3BBA9C;
     font-weight: 600;
     font-size: 40px;
     line-height: 28px;

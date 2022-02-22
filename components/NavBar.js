@@ -74,11 +74,6 @@ const NavBar = (props) => {
           </Link>
         </li>
 
-        <li className={styles.eachitem}>
-          <Link href="/navigation/explore">
-            <a className={styles.eachLink}> Explore </a>
-          </Link>
-        </li>
 
         <li className={styles.eachitem}>
           <Link href="/navigation/about">
