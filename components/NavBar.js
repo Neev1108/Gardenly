@@ -27,7 +27,7 @@ const NavBar = (props) => {
 
 
         <li className={styles.eachitem}>
-          <Link href="/profile/portfolio">
+          <Link href="/navigation/portfolio">
             <a className={styles.eachLink}> Your Garden </a>
           </Link>
         </li>
