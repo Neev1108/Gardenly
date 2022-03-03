@@ -8,14 +8,14 @@ export default async function handler(req, res) {
   const { db } = await connectToDatabase();
 
   const garden = await db
-      .collection("users")
+      .collection("gardens")
       .findOne({"token": token})
 
 
 
       if (garden){
         console.log("Garden Info found for profile")
-        res.json(user)
+        res.json(garden)
       }
       else {
         console.log("Garden info not found for profile")

@@ -21,3 +21,9 @@ Preview the example live on [StackBlitz]():
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/Neev1108/Gardenly)
 
 Please use Google Chrome to view website on stackblitz.
+Stackblitz might have problems making api calls so best way to test program right now is to pull and run. Then check localhost:3000
+
+```
+npm run dev
+
+```

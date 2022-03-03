@@ -2,6 +2,8 @@ import React from "react";
 import Layout from "../../components/Layout";
 import Cookies from "js-cookie";
 import { getUser } from "../../lib/userMiddleware";
+import {getGarden} from "../../lib/profileMiddleware"
+import Table from "../../components/GardenTable"
 
 class portfolio extends React.Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class portfolio extends React.Component {
         plant_name: "",
         plant_age: "",
       },
+      portfolio : [],
       page: "",
       token: ""
     };
@@ -48,10 +51,17 @@ class portfolio extends React.Component {
   };
 
 
-
   //set up api call for garden
   getCurrentGarden = async () => {
-    
+    const response = await getGarden(this.state.token)
+    if (response){
+      let { plants } = response.data
+      this.state.portfolio = Object.keys(plants).map((key) => [key, plants[key]]);
+      console.log("Garden found")
+    }
+    else {
+      console.log("Garden not found")
+    }
   }
 
   addGardenItem =  () => {
@@ -82,30 +92,16 @@ class portfolio extends React.Component {
     return (
       <>
         <Layout>
-          <div className="w-screen h-screen bg-white flex-col">
-            <nav className="flex w-8/12 h-[30] m-auto justify-center bg-grape">
+          <div className="w-screen h-screen flex flex-col bg-mint overflow-auto">
 
-              <div
-                onClick={this.addGardenItem()}
-                className="text-[16px] text-mint border border-black p-3"
-              >
-                {" "}
-                Add Garden Item{" "}
-              </div>
-              <div
-                onClick={this.removeGardenItem()}
-                className="text-[16px] text-mint border border-black p-3"
-              >
-                {" "}
-                Remove Garden Item{" "}
-              </div>
-            </nav>
-
-            <div className="flex justify-center w-8/12 m-auto items-center h-11">
-              
+            <div className="w-1/2 m-auto bg-white h-3/4"> 
+            <Table data={this.state.portfolio} /> 
             </div>
 
-            <div id="table"></div>
+            <div className="m-auto" id="add_form">
+              {this.addForm()}
+             </div>
+
           </div>
         </Layout>
       </>
