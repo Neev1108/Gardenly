@@ -8,7 +8,6 @@ export default async function handler(req, res) {
 
   //cross checks will databse and returns the objectID, email, password
   const { db } = await connectToDatabase();
-  console.log(db)
 
  await db
     .collection("users")

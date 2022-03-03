@@ -19,6 +19,8 @@ export default async function handler(req, res) {
 
   db.collection("users").insertOne({email: email, password: password, 
     FirstName: "", LastName:"", PhoneNumber: "", token: token})
+
+  db.collection("gardens").insertOne({token: token, plants: {}})
     
   res.status(200).json({token: token})
 

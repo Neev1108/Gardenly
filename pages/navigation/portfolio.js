@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import Cookies from "js-cookie";
-import { getUser } from "../../lib/userApi";
+import { getUser } from "../../lib/userMiddleware";
 
 class portfolio extends React.Component {
   constructor(props) {
@@ -12,7 +12,8 @@ class portfolio extends React.Component {
         plant_name: "",
         plant_age: "",
       },
-      showAddForm: false,
+      page: "",
+      token: ""
     };
   }
 
@@ -32,6 +33,7 @@ class portfolio extends React.Component {
       let response = await getUser({ token: auth_token });
       if (response) {
         let { email, token, FirstName, PhoneNumber, LastName } = response.data;
+        this.state.token = token
       } else {
         console.log("User not found or error. Please retry sign in or signup.");
         Router.push("/navigation/login");
@@ -45,11 +47,20 @@ class portfolio extends React.Component {
     this.loadUserFromCookies();
   };
 
+
+
+  //set up api call for garden
+  getCurrentGarden = async () => {
+    
+  }
+
   addGardenItem =  () => {
-      this.state.showAddForm = true
+      
   };
 
-  removeGardenItem = () => {};
+  removeGardenItem = () => {
+    
+  };
 
 
   addForm = () => {
@@ -73,6 +84,7 @@ class portfolio extends React.Component {
         <Layout>
           <div className="w-screen h-screen bg-white flex-col">
             <nav className="flex w-8/12 h-[30] m-auto justify-center bg-grape">
+
               <div
                 onClick={this.addGardenItem()}
                 className="text-[16px] text-mint border border-black p-3"
@@ -90,7 +102,7 @@ class portfolio extends React.Component {
             </nav>
 
             <div className="flex justify-center w-8/12 m-auto items-center h-11">
-                {this.state.showAddForm ? this.addForm() : null}
+              
             </div>
 
             <div id="table"></div>

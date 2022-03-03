@@ -1,8 +1,8 @@
 //Imports for libaries used or api calls
 import Cookies from "js-cookie";
-import { getUser } from "../../lib/userApi";
+import { getUser } from "../../lib/userMiddleware";
 import React from "react";
-import { profileEdit } from "../../lib/profileAPI";
+import { profileEdit } from "../../lib/profileMiddleware";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
