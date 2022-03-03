@@ -19,3 +19,5 @@ Logging out from root page does not change navbar to login/signup
 Preview the example live on [StackBlitz]():
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/Neev1108/Gardenly)
+
+Please use Google Chrome to view website on stackblitz.

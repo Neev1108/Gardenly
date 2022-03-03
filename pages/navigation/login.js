@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import Layout from "../../components/Layout";
 
-import { login } from "../../lib/userApi";
+import { login } from "../../lib/userMiddleware";
 import Cookies from "js-cookie";
 
 /**

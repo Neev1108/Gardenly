@@ -1,7 +1,7 @@
 import Router from "next/router";
 import Layout from "../../components/Layout";
 import { useState } from "react";
-import { signup } from "../../lib/userApi";
+import { signup } from "../../lib/userMiddleware";
 import Cookies from "js-cookie";
 
 /**
