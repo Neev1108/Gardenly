@@ -27,3 +27,13 @@ Stackblitz might have problems making api calls so best way to test program righ
 npm run dev
 
 ```
+
+# Refactoring To DOs
+
+- Comment each function
+- Fix axios requests to use promise api format
+- Seperate backend and front end
+- Create subdirectories for components, organizing it
+- Clean up error checking from api responses 
+- Create some unit tests and test some api endpoints
+- Clean up authentication and protect some endpoints for access
