@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 import { getUser } from "../../lib/userMiddleware";
 import {getGarden} from "../../lib/profileMiddleware"
 import Table from "../../components/GardenTable"
+import AddForm from "../../components/AddForm"
+
 
 class portfolio extends React.Component {
   constructor(props) {
@@ -72,22 +74,6 @@ class portfolio extends React.Component {
     
   };
 
-
-  addForm = () => {
-      return(
-        <form>
-        <label for="plant_type"> Plant Type:  </label>
-        <select id="plant_type" name="plant_type">
-          <option value="Fruit">Fruit</option>
-          <option value="Vegetable">Vegetable</option>
-          <option value="Flower">Flower</option>
-          <option value="Tree">Tree</option>
-          <option value="Tree">Succulents</option>
-        </select>
-        </form>
-      )
-  }
-
   render() {
     return (
       <>
@@ -98,8 +84,10 @@ class portfolio extends React.Component {
             <Table data={this.state.portfolio} /> 
             </div>
 
+            <div className="ml-auto mr-auto -mt-5 border p-3 rounded border-black bg-grape text-white"> Delete Selected </div> 
+
             <div className="m-auto" id="add_form">
-              {this.addForm()}
+              <AddForm> </AddForm>
              </div>
 
           </div>
