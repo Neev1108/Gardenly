@@ -4,41 +4,36 @@ This project is a in the work production of a full stack web application. It bui
 
 # The Application
 
-The project is a gardening application that allows users to store data about their plants and gardening practices. They can create a portfolio for their garden, checking in on times to water, seasons to plant, and other useful tips. Functions like best matainence practices might be implemeneted in later releases through some ML algorithms.
-
+The project is a gardening application that allows users to store data about their plants and gardening practices. They can create a portfolio for their garden, checking in on times to water, seasons to plant, and other useful tips. Functions like best matainence practices might be implemented in later releases through some ML algorithms.
 
 <h1> The structure   </h1>
-<p> This application uses NextJs for the majority of the client side and server side programming. It uses Recoil for state management, and MongoDB for the backend cloud database. Tailwind is used for fast css styling. Currently for authentication, I am using a database authentication style that develops my own token for experience's sake, but if I ever do deploy, then I might use a framework like Auth0. Deployment will take awhile because I have to make sure the website follows top security practices like middleware, token authorization, and other things.  </p>
+
+<p> This application uses NextJs for the majority of the client side and server side programming and MongoDB for the backend cloud database. Tailwind is used for fast css styling, along with some Materials UI for front-end web designing. Currently for authentication, I am using a database authentication style that gives an encrypted token which is then set as a js-cookie. This token will give access to the user for certain elements in the database.
 
 # Known Issues
 
-Logging out from root page does not change navbar to login/signup (everywhere else works)
+Logging out from root page does not change navbar to login/signup
 
+## Preview My App so far
 
-# Next.js + Tailwind CSS Example
+Preview the example live on [StackBlitz]():
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/Neev1108/Gardenly)
 
-## Preview
+Please use Google Chrome to view website on stackblitz.
+Stackblitz might have problems making api calls so best way to test program right now is to pull and run. Then check localhost:3000
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+```
+npm run dev
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+# Refactoring To DOs
+
+- Comment each function
+- Fix axios requests to use promise api format
+- Seperate backend and front end
+- Create subdirectories for components, organizing it
+- Clean up error checking from api responses 
+- Create some unit tests and test some api endpoints
+- Clean up authentication and protect some endpoints for access

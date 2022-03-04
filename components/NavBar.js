@@ -21,7 +21,14 @@ const NavBar = (props) => {
         <>
         <li className={styles.eachitem}>
           <Link href="/navigation/profile">
-            <a className={styles.eachLink}> User Dashboard </a>
+            <a className={styles.eachLink}> Account </a>
+          </Link>
+        </li>
+
+
+        <li className={styles.eachitem}>
+          <Link href="/navigation/portfolio">
+            <a className={styles.eachLink}> Your Garden </a>
           </Link>
         </li>
 
@@ -67,11 +74,6 @@ const NavBar = (props) => {
           </Link>
         </li>
 
-        <li className={styles.eachitem}>
-          <Link href="/navigation/explore">
-            <a className={styles.eachLink}> Explore </a>
-          </Link>
-        </li>
 
         <li className={styles.eachitem}>
           <Link href="/navigation/about">

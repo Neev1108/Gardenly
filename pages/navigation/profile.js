@@ -1,166 +1,189 @@
-import Layout from "../../components/Layout";
+//Imports for libaries used or api calls
 import Cookies from "js-cookie";
-import { useState, useEffect } from "react";
-import { getUser } from "../../lib/userApi";
+import { getUser } from "../../lib/userMiddleware";
+import React from "react";
+import { profileEdit } from "../../lib/profileMiddleware";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+
+//Imports for Parent or Child components
+import Layout from "../../components/Layout";
+import EditProfile from "../../components/EditProfile";
+import UserProfile from "../../components/UserProfile";
 import { Router } from "next/router";
 
-const profilePage = () => {
-  const [email, setEmail] = useState("");
-  const [form, showForm] = useState(false);
 
-  useEffect(() => {
-    async function loadUserFromCookies() {
-      const auth_token = Cookies.get("token");
-      if (auth_token) {
-        let response = await getUser({ token: auth_token });
-        let { email, token } = response;
-        setEmail(email);
-      } else {
-        console.log("No token cookie. Please log in.");
+
+/**
+* Brief description of the class here
+
+  This class will be an overall parent class for all profile/user information
+  relating to gardening, editing profile, and viewing profile (might add other features later)
+  States will mostly be stored here as the older React version of storing states (not hooks),
+  because of convinience
+* @extends React.Component
+*/
+
+class profilePage extends React.Component {
+  /**
+   * Brief description of the function here.
+   * @summary Constructor for the profile Page will have each state
+   * @param user - user gathered from api call when component is mounted
+   * @param first_name - First Name data submitted from child component (EditProfile) in a callback
+   * @param last_name - Last Name data submitted from child component (EditProfile) in a callback
+   * @param phone_number - Phone Number data submitted from child component (EditProfile) in a callback
+   * @param page - sets the current page after a toolbar click, default will be the User Profile page
+   */
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: "",
+      first_name: "",
+      last_name: "",
+      phone_number: "",
+      page: "User Profile",
+    };
+  }
+
+  /** 
+* A function that will called on each component mounting. 
+* @summary Function will read a current cookie on the browser 
+  (cookie stays for 60 min or after browser is closed). The cookie will have an 
+  auth token that is an encrypted string that will match with a user in the database.
+  Info about that user will be gathered through an api call with that auth token. 
+  The state is then set for the user after response for db.
+  This user state information will be sent to child components (the UserProfile component)
+* @return {State} No returning value but the overall user state is set.
+*/
+  loadUserFromCookies = async () => {
+    const auth_token = Cookies.get("token");
+    if (auth_token) {
+      let response = await getUser({ token: auth_token });
+      if (response){
+        let { email, token, FirstName, PhoneNumber, LastName} = response.data;
+        this.setState({ user: email, first_name: FirstName, last_name: LastName,
+        phone_number: PhoneNumber });
+      }
+      else {
+        console.log("User not found or error. Please retry sign in or signup.")
+        Router.push("/navigation/login")
+      }
+    } else {
+      console.log("No token cookie. Please log in.");
+    }
+  };
+
+  componentDidMount = () => {
+    this.loadUserFromCookies();
+  };
+
+  /** 
+* Brief description of the function here.
+* @summary This function will make the api call to update the user document in mongodb. 
+  It will first find the current token for the user and then make a call to the profile/editProfile endpoint.
+  That call will update the user document with the information.
+*/
+
+  profileChanged = async () => {
+    const auth_token = Cookies.get("token");
+    if (
+      this.state.first_name &&
+      this.state.last_name &&
+      this.state.phone_number
+    ) {
+      let res = await profileEdit(
+        auth_token,
+        this.state.first_name,
+        this.state.last_name,
+        this.state.phone_number
+      );
+
+      console.log(res)
+      if (res.status == 200){
+        Router.push("navigation/profile")
+      }
+      else {
+        console.log("Something went wrong with profile edit")
       }
     }
+  };
 
-    loadUserFromCookies();
-  }, []);
+  /**
+   * Brief description of the function here.
+   * @summary Function called when a toolbar button is pressed, will set the state of the page
+   * @param {String} text - The text in the button will guide the user to the appropiate page
+   */
 
-  function buttonPressed() {
-    showForm(true);
-    var edit_profile_button = document.getElementById("edit_profile");
-    edit_profile_button.remove();
-  }
+  buttonPressed = (text) => {
+    if (text == "User Profile") {
+      this.setState({ page: "User Profile" });
+    } 
+     else {
+      this.setState({ page: "Edit Profile" });
+    }
+  };
 
-  function BackButtonPressed() {
-    Router.push("navigation/profile");
-  }
+  /** 
+* Brief description of the function here.
+* @summary The function called after a callback to the child component, 
+  the child component will send submitted data and this parent component will set the state of that data
+* @param params - All paramaters can be looked at in the state docstring above.
+*/
+  setParameters = (firstName, lastName, phoneNumber) => {
+    this.setState({ first_name: firstName });
+    this.setState({ last_name: lastName });
+    this.setState({ phone_number: phoneNumber });
 
-  function editProfile() {
+    this.profileChanged()
+  };
+
+  render() {
+    /*
+    The following code will check the page state and return a child component that will be placed 
+    at the main content of the dashboard
+    */
+    var checkPage;
+    if (this.state.page == "User Profile") {
+      checkPage = <UserProfile user={this.state.user}> </UserProfile>;
+    } 
+    else if (this.state.page == "Edit Profile") {
+      checkPage = (
+        <EditProfile setParameters={this.setParameters}> </EditProfile>
+      );
+    }
+
     return (
       <>
-        <form>
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="email"
-              name="floating_email"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 
-              border-b-2 border-gray-300 appearance-none dark:text-white
-               dark:border-gray-600 peer"
-              placeholder=" "
-              required
-            />
-            <label htmlFor="floating_email">Email address</label>
-          </div>
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="password"
-              name="floating_password"
-              id="floating_password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 
-              bg-transparent border-0 border-b-2 border-gray-300 appearance-none 
-              dark:text-white dark:border-gray-600 peer"
-              placeholder=" "
-              required
-            />
-            <label htmlFor="floating_password">Password</label>
-          </div>
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="password"
-              name="repeat_password"
-              id="floating_repeat_password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 
-              bg-transparent border-0 border-b-2 border-gray-300 
-              appearance-none dark:text-white peer"
-              placeholder=" "
-              required
-            />
-            <label htmlFor="floating_repeat_password">Confirm password</label>
-          </div>
-          <div className="grid xl:grid-cols-2 xl:gap-6">
-            <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="text"
-                name="floating_first_name"
-                id="floating_first_name"
-                className="block py-2.5 px-0 w-full text-sm 
-                text-gray-900 bg-transparent border-0 border-b-2 
-                border-gray-300 appearance-none dark:text-white peer"
-                placeholder=" "
-                required
-              />
-              <label htmlFor="floating_first_name">First name</label>
-            </div>
-            <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="text"
-                name="floating_last_name"
-                id="floating_last_name"
-                className="block py-2.5 px-0 w-full text-sm 
-                text-gray-900 bg-transparent border-0 border-b-2 
-                border-gray-300 appearance-none dark:text-white peer"
-                placeholder=" "
-                required
-              />
-              <label htmlFor="floating_last_name">Last name</label>
-            </div>
-          </div>
-          <div className="grid xl:grid-cols-2 xl:gap-6">
-            <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="tel"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                name="floating_phone"
-                id="floating_phone"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 
-                bg-transparent border-0 border-b-2 border-gray-300 appearance-none 
-                dark:text-white dark:border-gray-600 peer"
-                placeholder=" "
-                required
-              />
-              <label htmlFor="floating_phone">Phone number</label>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="text-white bg-black font-medium rounded-lg 
-            text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        <Layout title="Profile">
+          {/* Dashboard will be an grid div with a toolbar on the left and the main content on the right */}
+          <div
+            id="profile_content"
+            className="flex flex-col w-screen h-screen bg-mint overflow-auto"
           >
-            Submit
-          </button>
-        </form>
+          <div id="dashboard" className="flex flex-row ">
+            <div id="sidebar" className="flex flex-col
+             text-white h-screen w-48 ml-16 space-y-4 bg-neutral-900">
+               <AccountCircleIcon className="h-[100px] w-[100px] m-12"> </AccountCircleIcon>
+              <button className="text-[20px] font-semibold hover:border hover:text-gray-500 text-white leading-6 mt-20" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+                User Profile
+              </button>
 
-        <button
-          className="text-white bg-black font-medium rounded-lg 
-            text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-          onClick={BackButtonPressed}
-        >
-          Back
-        </button>
+              <button className="text-[20px] font-semibold hover:border-2 hover:text-gray-500 text-white leading-6" onClick={(e) => this.buttonPressed(e.target.innerHTML)}>
+                Edit Profile
+              </button>
+            </div>
+
+            {/* Main Content of dashboard goes here after checking what page was clicked */}
+            <div className="w-9/12" id="main_content">
+              {checkPage}
+            </div>
+          </div>
+          </div>
+        </Layout>
       </>
     );
   }
-
-  return (
-    <>
-      <Layout title="Profile">
-        <div>
-          <div className="justify-center m-auto mt-8 flex">
-            <button
-              id="edit_profile"
-              className=" text-white text-3xl font-bold justify-center bg-black
-          border-black border-solid rounded p-4 flex"
-              onClick={buttonPressed}
-            >
-              {" "}
-              Edit Profile{" "}
-            </button>
-            {form ? editProfile() : null}
-          </div>
-
-
-        </div>
-      </Layout>
-    </>
-  );
-};
+}
 
 export default profilePage;
