@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import Cookies from "js-cookie";
 import { getUser } from "../../lib/userMiddleware";
 import {getGarden} from "../../lib/profileMiddleware"
-import Table from "../../components/GardenTable"
+import Table from "../../components/Table/GardenTable"
 import AddForm from "../../components/AddForm"
 
 
