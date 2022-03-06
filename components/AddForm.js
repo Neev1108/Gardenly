@@ -17,21 +17,21 @@ const AddForm = () => {
       <form>
 
 
-        <label className={styles.labels} for="plant_type"> Plant Type: </label>
+        <label className={styles.labels} htmlFor="plant_type"> Plant Type: </label>
         <select id="plant_type" name="plant_type">
           {plant_types.map((type) => (
-            <option value={type}>{type}</option>
+            <option key={type} value={type}>{type}</option>
           ))}
         </select>
 
-        <label className={styles.labels} for="plant_name"> Plant Name: </label>
+        <label className={styles.labels} htmlFor="plant_name"> Plant Name: </label>
         <select id="plant_name" name="plant_name">
           {plant_names.map((name) => (
-            <option value={name}>{name}</option>
+            <option key={name} value={name}>{name}</option>
           ))}
         </select>
 
-        <label className={styles.labels} for="plant_age"> Plant Age: </label>
+        <label className={styles.labels} htmlFor="plant_age"> Plant Age: </label>
         <input className="w-16" type="text" id="plant_age" name="plant_age"/> 
 
         <button className={styles.button} type="submit"> Add Item </button>

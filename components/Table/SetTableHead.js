@@ -29,7 +29,6 @@ const SetTableHead = (props) => {
     return (
         <TableHead>
         <TableRow>
-            <TableCell key={'drag'}/>
             <TableCell key={'select'}>
                 <Checkbox
                     onChange={props.onAllRowsSelected}
