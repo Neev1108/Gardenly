@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import Cookies from "js-cookie";
 import { getUser } from "../../lib/userMiddleware";
-import {getGarden} from "../../lib/profileMiddleware"
+import {getGarden, addGarden} from "../../lib/profileMiddleware"
 import Table from "../../components/Table/GardenTable"
 import AddForm from "../../components/AddForm"
 
@@ -18,7 +18,6 @@ class portfolio extends React.Component {
       },
       portfolio : [],
       page: "",
-      token: ""
     };
   }
 
@@ -37,7 +36,7 @@ class portfolio extends React.Component {
     if (auth_token) {
       let response = await getUser({ token: auth_token });
       if (response) {
-        let { email, token, FirstName, PhoneNumber, LastName } = response.data;
+        let { token } = response.data;
         this.state.token = token
       } else {
         console.log("User not found or error. Please retry sign in or signup.");
@@ -50,12 +49,14 @@ class portfolio extends React.Component {
 
   componentDidMount = () => {
     this.loadUserFromCookies();
+    this.getCurrentGarden();
   };
 
 
   //set up api call for garden
   getCurrentGarden = async () => {
-    const response = await getGarden(this.state.token)
+    const auth_token = Cookies.get("token");
+    const response = await getGarden({token: auth_token})
     if (response){
       let { plants } = response.data
       this.state.portfolio = Object.keys(plants).map((key) => [key, plants[key]]);
@@ -66,8 +67,9 @@ class portfolio extends React.Component {
     }
   }
 
-  addGardenItem =  () => {
-      
+  addGardenItem =  (name, type, age) => {
+    console.log("Age is:", age)
+      //let res = addGarden({token: this.state.token, plant_type: type, plant_name: name, plant_age: age})
   };
 
   removeGardenItem = () => {
@@ -87,7 +89,7 @@ class portfolio extends React.Component {
             <div className="ml-auto mr-auto -mt-5 border p-3 rounded border-black bg-grape text-white"> Delete Selected </div> 
 
             <div className="m-auto" id="add_form">
-              <AddForm> </AddForm>
+              <AddForm addGardenItem={this.addGardenItem}> </AddForm>
              </div>
 
           </div>

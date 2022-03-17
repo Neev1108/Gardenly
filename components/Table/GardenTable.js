@@ -10,16 +10,15 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Checkbox from "@mui/material/Checkbox";
 
 import SetTableHead from "./SetTableHead";
-import SetTableBody from "./SetTableBody";
 
 const GardenTable = (props) => {
   const [selectAll, setSelectAll] = React.useState(false);
   const [selectedItems, setSelectedItems] = React.useState([]);
   // Some fake data
 
-  //const body_data = props.portfolio
+  //const data = props.portfolio
 
-  let rows = [
+  let data = [
     { name: "Rose", type: "Flower", id: 1, age: 10 },
     { name: "LI", type: "HI", id: 6, age: 10 },
   ];
@@ -48,7 +47,7 @@ const GardenTable = (props) => {
           <Table>
             <SetTableHead onAllRowsSelected={onAllRowsSelected} />
             <TableBody>
-              {rows.map((row) => (
+              {data.map((row) => (
                 <TableRow
                   key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
