@@ -9,10 +9,6 @@ const SetTableHead = (props) => {
 
     const columns = [
         {
-        field: "id",
-        heading: "Plant Id",
-       },
-        {
           field: "type",
           heading: "Plant Type",
         },

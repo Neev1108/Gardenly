@@ -37,3 +37,4 @@ npm run dev
 - Clean up error checking from api responses 
 - Create some unit tests and test some api endpoints
 - Clean up authentication and protect some endpoints for access
+- Optimize re-renderings from React to improve performance

@@ -4,9 +4,9 @@ import {useState} from 'react'
 
 const AddForm = (props) => {
 
-  const [plant_name, setPlantName] = useState("")
-  const [plant_type, setPlantType] = useState("")
-  const [plant_age, setPlantAge] = useState("")
+  const [plant_name, setPlantName] = useState("Rose")
+  const [plant_type, setPlantType] = useState("Fruit")
+  const [plant_age, setPlantAge] = useState("0")
 
   var plant_types = ["Fruit", "Vegetable", "Flower", "Tree", "Succulents"];
   var plant_names = ["Rose", "Tulip", "Evergreen", "Aloe Vera"];

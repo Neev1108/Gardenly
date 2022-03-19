@@ -59,8 +59,7 @@ class portfolio extends React.Component {
     const response = await getGarden({token: auth_token})
     if (response){
       let { plants } = response.data
-      this.state.portfolio = Object.keys(plants).map((key) => [key, plants[key]]);
-      console.log("Garden found")
+      this.setState({portfolio: plants})
     }
     else {
       console.log("Garden not found")
@@ -68,8 +67,7 @@ class portfolio extends React.Component {
   }
 
   addGardenItem =  (name, type, age) => {
-    console.log("Age is:", age)
-      //let res = addGarden({token: this.state.token, plant_type: type, plant_name: name, plant_age: age})
+      let res = addGarden({token: this.state.token, plant_type: type, plant_name: name, plant_age: age})
   };
 
   removeGardenItem = () => {
