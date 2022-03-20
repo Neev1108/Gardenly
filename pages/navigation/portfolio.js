@@ -59,6 +59,9 @@ class portfolio extends React.Component {
     const response = await getGarden({token: auth_token})
     if (response){
       let { plants } = response.data
+      plants.forEach(function (plant, index) {
+          plant.id = index
+      })
       this.setState({portfolio: plants})
     }
     else {
@@ -68,6 +71,7 @@ class portfolio extends React.Component {
 
   addGardenItem =  (name, type, age) => {
       let res = addGarden({token: this.state.token, plant_type: type, plant_name: name, plant_age: age})
+
   };
 
   removeGardenItem = () => {

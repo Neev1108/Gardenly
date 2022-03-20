@@ -20,7 +20,9 @@ const GardenTable = (props) => {
   };
 
   const onItemSelect = (id) => {
-    setSelectedItems([...selectedItems, id]);
+    let new_items = selectedItems.includes(id) ? selectedItems.filter(item => item != id) : selectedItems
+    setSelectedItems([...new_items, id]);
+    console.log(selectedItems)
   };
 
   return (
@@ -45,7 +47,9 @@ const GardenTable = (props) => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="right">
-                    <Checkbox />
+                    <Checkbox key={index} 
+                    checked = {selectedItems.includes(row.id)} 
+                    onChange={() => onItemSelect(row.id)} />
                   </TableCell>
 
 

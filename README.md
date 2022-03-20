@@ -38,3 +38,4 @@ npm run dev
 - Create some unit tests and test some api endpoints
 - Clean up authentication and protect some endpoints for access
 - Optimize re-renderings from React to improve performance
+- Clean up error handling (need to look through open source projects for best practices on this)

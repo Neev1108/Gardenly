@@ -11,17 +11,15 @@ export default async function handler(req, res) {
   //cross checks will databse and returns the objectID, email, password
   const { db } = await connectToDatabase();
 
-  db.collection("gardens").updateOne({ token: token },  {
+ const result =  db.collection("gardens").updateOne({ token: token },  {
     $push: {
       plants: {PlantType: type, PlantName: name, PlantAge: age}, 
     },
   },
 
-  function (err, res) {
-    if (err) throw err;
-    console.log("1 document updated");
-    res.status(200).json()
+  function (err, info) {
+    res.json(info.ops[0])
   }
-  
 );
+
 }
