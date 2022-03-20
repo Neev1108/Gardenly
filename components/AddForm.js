@@ -8,8 +8,10 @@ const AddForm = (props) => {
   const [plant_type, setPlantType] = useState("Fruit")
   const [plant_age, setPlantAge] = useState("0")
 
-  var plant_types = ["Fruit", "Vegetable", "Flower", "Tree", "Succulents"];
-  var plant_names = ["Rose", "Tulip", "Evergreen", "Aloe Vera"];
+  var plant_types = ["Fruit", "Vegetable", "Flower", "Tree", "Succulents", "Mushroom", "Herbs", "Climbers"];
+  var plant_names = ["Rose", "Tulip", "Evergreen", "Aloe Vera", "Apple Tree", "Orange Tree", "Lemon Tree", "Plum Tree", "Tomato Plant", "Water Melon Plant", 
+  "Golden Barrel Cactus", "Prickly Pear Cactus", "Basil Plant", "Cilantro Plant", "RoseMary Plant", "Sage Plant",
+  "White Button Mushroom", "Portobello Mushrooms", "Cremini Mushrooms", "Morel Mushrooms", "Shitake Mushrooms"];
 
 
   const styles = {

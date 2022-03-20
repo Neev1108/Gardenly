@@ -16,10 +16,8 @@ export default async function handler(req, res) {
       plants: {PlantType: type, PlantName: name, PlantAge: age}, 
     },
   },
-
-  function (err, info) {
-    res.json(info.ops[0])
-  }
 );
+
+res.json(result)
 
 }
