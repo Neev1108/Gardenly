@@ -39,3 +39,4 @@ npm run dev
 - Clean up authentication and protect some endpoints for access
 - Optimize re-renderings from React to improve performance
 - Clean up error handling (need to look through open source projects for best practices on this)
+- Use context instead of prop drilling when refactoring

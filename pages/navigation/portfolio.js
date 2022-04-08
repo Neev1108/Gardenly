@@ -34,6 +34,7 @@ class portfolio extends React.Component {
   loadUserFromCookies = async () => {
     const auth_token = Cookies.get("token");
     if (auth_token) {
+      
       let response = await getUser({ token: auth_token });
       if (response) {
         let { token } = response.data;
